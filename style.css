@@ -77,11 +77,14 @@ footer {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	align-items: center;
+	background-color: #06171e;
 }
 
 .highlight-image {
 	max-height: 300px;
-	max-width: 300px;
+	min-width: 300px;
+	max-width: 350px;
 	object-fit: cover;
 	border: #124658 solid 2px;
 }

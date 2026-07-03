@@ -25,7 +25,7 @@ function renderImages() {
         const element = myimages[index];
         console.log(element)
         containerRef.innerHTML += /*html*/`<div id="image-container">
-            <img class="image" id="img${index}" src="/media/${myimages[index].filename}" onclick="highlightImage(${index})"></img></div>`;
+            <img class="image" id="img${index}" src="/media/${myimages[index].filename}" onclick="highlightImage(${index})"></div>`;
     }
 }
 
@@ -39,11 +39,9 @@ function highlightImage(index) {
 					<p>PLACEHOLDER NAME</p>
 					<button onclick="closeHighlightImage()">X</button>
 				</header>
-				<main>
                     <img class="highlight-image" id="img${index}" 
                     src="/media/${myimages[index].filename}" 
                     onclick="highlightImage(${index})">
-                </main>
 				<footer id="photo-highlight-footer">
 					<button>X</button>
 					<p>1/14</p>
