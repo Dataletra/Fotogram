@@ -74,11 +74,15 @@ footer {
 	height: 70dvh;
 	position: fixed;
 	margin: auto;
+	background-color: #06171e;
+}
+
+.dialog-content {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	background-color: #06171e;
+	height: 100%;
 }
 
 .highlight-image {
@@ -87,4 +91,25 @@ footer {
 	max-width: 350px;
 	object-fit: cover;
 	border: #124658 solid 2px;
+}
+
+#photo-highlight-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px;
+}
+#photo-highlight-footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 15px;
+	p {
+		min-width: 120px;
+		max-width: 120px;
+		text-align: center;
+		padding: 15px;
+	}
 }

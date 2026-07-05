@@ -24,8 +24,10 @@ function renderImages() {
     for (let index = 0; index < myimages.length; index++) {
         const element = myimages[index];
         console.log(element)
-        containerRef.innerHTML += /*html*/`<div id="image-container">
-            <img class="image" id="img${index}" src="/media/${myimages[index].filename}" onclick="highlightImage(${index})"></div>`;
+        containerRef.innerHTML += /*html*/`
+        <div id="image-container">
+            <img class="image" id="img${index}" src="/media/${myimages[index].filename}" onclick="highlightImage(${index})">
+        </div>`;
     }
 }
 
@@ -33,24 +35,41 @@ renderImages();
 
 function highlightImage(index) {
     console.log(index)
-    dialogRef.innerHTML = "";
-
-    dialogRef.innerHTML += /*html*/`<header id="photo-highlight-header">
-					<p>PLACEHOLDER NAME</p>
-					<button onclick="closeHighlightImage()">X</button>
-				</header>
-                    <img class="highlight-image" id="img${index}" 
-                    src="/media/${myimages[index].filename}" 
-                    onclick="highlightImage(${index})">
-				<footer id="photo-highlight-footer">
-					<button>X</button>
-					<p>1/14</p>
-					<button>X</button>
-				</footer>`;
+    updateModal(index);
     dialogRef.classList.add("open");
     dialogRef.showModal()
 }
 
+function updateModal(index) {
+
+    dialogRef.innerHTML = "";
+
+    dialogRef.innerHTML += /*html*/`
+    <div class="dialog-content">
+        <header id="photo-highlight-header">
+			<p>${myimages[index].title}</p>
+			<button onclick="closeHighlightImage()">X</button>
+		</header>
+        <img class="highlight-image" id="img${index}" 
+            src="/media/${myimages[index].filename}" 
+            onclick="highlightImage(${index})">
+		<footer id="photo-highlight-footer">
+			<button onclick="decrementModal(${index})">X</button>
+			<p>${index + 1}/${myimages.length}</p>
+			<button onclick="incrementModal(${index})">X</button>
+		</footer>
+    </div>`;
+}
+
+// bugged
+function incrementModal(index) {
+    if (index == myimages.length - 1) return;
+    updateModal(++index);
+}
+function decrementModal(index) {
+    if (index == 0) return;
+    updateModal(--index);
+}
 function closeHighlightImage() {
     dialogRef.close()
     dialogRef.classList.remove("open");
