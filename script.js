@@ -9,8 +9,7 @@ let myimages = [{ title: "Moon", filename: "010.jpg" },
 { title: "Corpse 1", filename: "a0mmzqsvth261 (1).png" },
 { title: "Corpse 2", filename: "Corpse colored final.png" },
 { title: "Ready Or Not Dataletra", filename: "Dataletra 2.png" },
-{ title: "Minecraft my beloved", filename: "Minecraft_-_Volume_Beta.jpg" },
-{ title: "yet another artpiece", filename: "Data Skull.jpg" }
+{ title: "Minecraft my beloved", filename: "Minecraft_-_Volume_Beta.jpg" }
 ]
 console.log(myimages.length)
 
@@ -26,13 +25,13 @@ function renderImages() {
         containerRef.innerHTML += /*html*/`
         <div id="image-container">
             <img class="image" id="img${index}" 
-            src="/media/${myimages[index].filename}" 
-            onclick="highlightImage(${index})">
+            src="media/${myimages[index].filename}" 
+            onclick="highlightImage(${index})"
+            alt="media/${myimages[index].title}">
         </div>`;
     }
 }
 
-renderImages();
 
 function highlightImage(index) {
     updateModal(index);
@@ -41,9 +40,7 @@ function highlightImage(index) {
 }
 
 function updateModal(index) {
-
     dialogRef.innerHTML = "";
-
     dialogRef.innerHTML += /*html*/`
     <div class="dialog-content">
         <header class="photo-highlight-header">
@@ -51,25 +48,27 @@ function updateModal(index) {
 			<button class="button-close" onclick="closeHighlightImage()">X</button>
 		</header>
         <img class="highlight-image" id="img${index}" 
-            src="/media/${myimages[index].filename}" 
+            src="media/${myimages[index].filename}"
+            alt="media/${myimages[index].title}"
             onclick="highlightImage(${index})">
 		<footer class="photo-highlight-footer">
-			<button class="button-left" onclick="decrementModal(${index})"><img class="button-right" src="/media/button.png"></button>
+			<button  onclick="decrementModal(${index})"><img class="button-left" src="./media/button.png"></button>
 			<p>${index + 1}/${myimages.length}</p>
-			<button  onclick="incrementModal(${index})"><img class="button-right" src="/media/button.png"></button>
+			<button  onclick="incrementModal(${index})"><img class="button-right" src="./media/button.png"></button>
 		</footer>
     </div>`;
 }
 
+renderImages();
 function incrementModal(index) {
     //safetycheck
     if (index == myimages.length - 1) return;
-    updateModal(++index);
+    updateModal(index + 1);
 }
 function decrementModal(index) {
     //safetycheck
     if (index == 0) return;
-    updateModal(--index);
+    updateModal(index - 1);
 }
 function closeHighlightImage() {
     dialogRef.close()
