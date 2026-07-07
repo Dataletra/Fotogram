@@ -10,28 +10,18 @@ let myimages = [{ title: "Moon", filename: "010.jpg" },
 { title: "Corpse 2", filename: "Corpse colored final.png" },
 { title: "Ready Or Not Dataletra", filename: "Dataletra 2.png" },
 { title: "Minecraft my beloved", filename: "Minecraft_-_Volume_Beta.jpg" }
-]
-console.log(myimages.length)
+];
 
 const containerRef = document.getElementById("photo-container");
 const dialogRef = document.getElementById("photo-highlight");
-
 
 function renderImages() {
     containerRef.innerHTML = "";
     for (let index = 0; index < myimages.length; index++) {
         const element = myimages[index];
-        console.log(element)
-        containerRef.innerHTML += /*html*/`
-        <div id="image-container">
-            <img class="image" id="img${index}" 
-            src="media/${myimages[index].filename}" 
-            onclick="highlightImage(${index})"
-            alt="media/${myimages[index].title}">
-        </div>`;
+        containerRef.innerHTML += getImages(index);
     }
 }
-
 
 function highlightImage(index) {
     updateModal(index);
@@ -41,35 +31,21 @@ function highlightImage(index) {
 
 function updateModal(index) {
     dialogRef.innerHTML = "";
-    dialogRef.innerHTML += /*html*/`
-    <div class="dialog-content">
-        <header class="photo-highlight-header">
-			<p>${myimages[index].title}</p>
-			<button class="button-close" onclick="closeHighlightImage()">X</button>
-		</header>
-        <img class="highlight-image" id="img${index}" 
-            src="media/${myimages[index].filename}"
-            alt="media/${myimages[index].title}"
-            onclick="highlightImage(${index})">
-		<footer class="photo-highlight-footer">
-			<button  onclick="decrementModal(${index})"><img class="button-left" src="./media/button.png"></button>
-			<p>${index + 1}/${myimages.length}</p>
-			<button  onclick="incrementModal(${index})"><img class="button-right" src="./media/button.png"></button>
-		</footer>
-    </div>`;
+    dialogRef.innerHTML += getModal(index);
 }
 
-renderImages();
 function incrementModal(index) {
     //safetycheck
-    if (index == myimages.length - 1) return;
+    if (index == myimages.length - 1) index = -1;
     updateModal(index + 1);
 }
+
 function decrementModal(index) {
     //safetycheck
-    if (index == 0) return;
+    if (index == 0) index = myimages.length;
     updateModal(index - 1);
 }
+
 function closeHighlightImage() {
     dialogRef.close()
     dialogRef.classList.remove("open");
